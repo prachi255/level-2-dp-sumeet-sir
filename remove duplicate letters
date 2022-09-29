@@ -1,0 +1,37 @@
+   
+   
+   https://leetcode.com/problems/remove-duplicate-letters/submissions/
+   
+   public String removeDuplicateLetters(String s) {
+        //freq array
+        char[] arr=s.toCharArray();
+        int[]rem=new int[26];
+        for(char c:arr){
+            rem[c-'a']++;
+        }
+        
+        boolean[]ais=new boolean[26];
+        Stack<Character> st=new Stack<>();
+        for(char c:arr){
+            rem[c-'a']--;
+            
+            if(ais[c-'a']==false){
+                while(st.size()>0 && rem[st.peek()-'a']>0 && c<st.peek()){
+                    ais[st.peek()-'a']=false;
+                    st.pop();
+                }
+                
+                ais[c-'a']=true;
+                st.push(c);
+            }
+        }
+        
+        StringBuilder sb=new StringBuilder();
+        while(st.size()>0){
+            sb.append(st.peek());
+            st.pop();
+        }
+        
+        return sb.reverse().toString();
+        
+    }
