@@ -1,0 +1,17 @@
+https://leetcode.com/problems/validate-stack-sequences/submissions/
+
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int i=0,j=0;
+        Stack<Integer> stk=new Stack<>();
+        while(i<pushed.length){
+            stk.push(pushed[i]);
+            i++;
+            
+            while(stk.size()>0 && j<popped.length && stk.peek()==popped[j]){
+                j++;
+                stk.pop();
+            }
+        }
+        
+        return j==popped.length;
+    }
